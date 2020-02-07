@@ -27,6 +27,7 @@ Partial Class SolutionBuilderForm
         Me.grpboxSolutions = New System.Windows.Forms.GroupBox()
         Me.btnBuildSolutions = New System.Windows.Forms.Button()
         Me.txtboxBuildOutput = New System.Windows.Forms.RichTextBox()
+        Me.chkboxShowBuildOutput = New System.Windows.Forms.CheckBox()
         Me.grpboxSolutions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -36,7 +37,6 @@ Partial Class SolutionBuilderForm
         Me.chklistSolutions.FormattingEnabled = True
         Me.chklistSolutions.Location = New System.Drawing.Point(3, 16)
         Me.chklistSolutions.Name = "chklistSolutions"
-        Me.chklistSolutions.SelectionMode = System.Windows.Forms.SelectionMode.None
         Me.chklistSolutions.Size = New System.Drawing.Size(641, 94)
         Me.chklistSolutions.TabIndex = 0
         '
@@ -86,15 +86,30 @@ Partial Class SolutionBuilderForm
         Me.txtboxBuildOutput.Name = "txtboxBuildOutput"
         Me.txtboxBuildOutput.ReadOnly = True
         Me.txtboxBuildOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
-        Me.txtboxBuildOutput.Size = New System.Drawing.Size(644, 149)
+        Me.txtboxBuildOutput.Size = New System.Drawing.Size(644, 126)
         Me.txtboxBuildOutput.TabIndex = 4
         Me.txtboxBuildOutput.Text = ""
+        '
+        'chkboxShowBuildOutput
+        '
+        Me.chkboxShowBuildOutput.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkboxShowBuildOutput.AutoSize = True
+        Me.chkboxShowBuildOutput.Checked = True
+        Me.chkboxShowBuildOutput.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkboxShowBuildOutput.Location = New System.Drawing.Point(12, 296)
+        Me.chkboxShowBuildOutput.Name = "chkboxShowBuildOutput"
+        Me.chkboxShowBuildOutput.Size = New System.Drawing.Size(114, 17)
+        Me.chkboxShowBuildOutput.TabIndex = 5
+        Me.chkboxShowBuildOutput.Text = "Show Build Output"
+        Me.chkboxShowBuildOutput.UseVisualStyleBackColor = True
         '
         'SolutionBuilderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(671, 361)
+        Me.Controls.Add(Me.chkboxShowBuildOutput)
         Me.Controls.Add(Me.txtboxBuildOutput)
         Me.Controls.Add(Me.btnBuildSolutions)
         Me.Controls.Add(Me.grpboxSolutions)
@@ -102,6 +117,7 @@ Partial Class SolutionBuilderForm
         Me.Text = "Solution Builder"
         Me.grpboxSolutions.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -110,4 +126,5 @@ Partial Class SolutionBuilderForm
     Friend WithEvents grpboxSolutions As GroupBox
     Friend WithEvents btnBuildSolutions As Button
     Friend WithEvents txtboxBuildOutput As RichTextBox
+    Friend WithEvents chkboxShowBuildOutput As CheckBox
 End Class

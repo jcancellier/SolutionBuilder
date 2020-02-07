@@ -1,4 +1,20 @@
 ﻿Public Class SolutionBuilderForm
+
+#Region "Event Handlers"
+    Private Sub SolutionBuilderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Optimize appending build output to text box by double buffering the form
+        Me.SetStyle(
+            ControlStyles.AllPaintingInWmPaint _
+            Or ControlStyles.UserPaint _
+            Or ControlStyles.OptimizedDoubleBuffer, True
+        )
+
+        'Set current solution build index to -1
+        chklistSolutions.Tag = New SolutionCheckListData() With {
+            .CurrentSolutionBuildingIndex = -1
+        }
+    End Sub
+
     Private Sub btnAddSolution_Click(sender As Object, e As EventArgs) Handles btnAddSolution.Click
         'Open File Dialog
         Using openFileDialog As New OpenFileDialog()
@@ -14,6 +30,27 @@
         BuildSolutions()
     End Sub
 
+    Private Sub chklistSolutions_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles chklistSolutions.ItemCheck
+        BeginInvoke(New MethodInvoker(
+            Sub()
+                If chklistSolutions.CheckedItems.Count > 0 Then
+                    btnBuildSolutions.Enabled = True
+                Else
+                    btnBuildSolutions.Enabled = False
+                End If
+            End Sub))
+    End Sub
+
+    Private Sub chkboxShowBuildOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkboxShowBuildOutput.CheckedChanged
+        If (chkboxShowBuildOutput.Checked) Then
+            txtboxBuildOutput.Show()
+        Else
+            txtboxBuildOutput.Hide()
+        End If
+    End Sub
+#End Region
+
+#Region "Private Methods"
     Private Sub BuildSolutions()
         If CType(chklistSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex <> -1 Then
             Exit Sub
@@ -86,12 +123,6 @@
             End Sub))
     End Sub
 
-    Private Sub SolutionBuilderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Set current solution build index to -1
-        chklistSolutions.Tag = New SolutionCheckListData() With {
-            .CurrentSolutionBuildingIndex = -1
-        }
-    End Sub
 
     Private Sub SetControlsEnabledStatus(enabled As Boolean)
         BeginInvoke(New MethodInvoker(
@@ -101,16 +132,5 @@
                 chklistSolutions.Enabled = enabled
             End Sub))
     End Sub
-
-    Private Sub chklistSolutions_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles chklistSolutions.ItemCheck
-        BeginInvoke(New MethodInvoker(
-            Sub()
-                If chklistSolutions.CheckedItems.Count > 0 Then
-                    btnBuildSolutions.Enabled = True
-                Else
-                    btnBuildSolutions.Enabled = False
-                End If
-            End Sub))
-
-    End Sub
+#End Region
 End Class
