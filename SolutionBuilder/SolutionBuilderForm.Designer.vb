@@ -26,7 +26,7 @@ Partial Class SolutionBuilderForm
         Me.btnAddSolution = New System.Windows.Forms.Button()
         Me.grpboxSolutions = New System.Windows.Forms.GroupBox()
         Me.btnBuildSolutions = New System.Windows.Forms.Button()
-        Me.txtboxBuildOutput = New System.Windows.Forms.TextBox()
+        Me.txtboxBuildOutput = New System.Windows.Forms.RichTextBox()
         Me.grpboxSolutions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -36,6 +36,7 @@ Partial Class SolutionBuilderForm
         Me.chklistSolutions.FormattingEnabled = True
         Me.chklistSolutions.Location = New System.Drawing.Point(3, 16)
         Me.chklistSolutions.Name = "chklistSolutions"
+        Me.chklistSolutions.SelectionMode = System.Windows.Forms.SelectionMode.None
         Me.chklistSolutions.Size = New System.Drawing.Size(641, 94)
         Me.chklistSolutions.TabIndex = 0
         '
@@ -65,6 +66,7 @@ Partial Class SolutionBuilderForm
         'btnBuildSolutions
         '
         Me.btnBuildSolutions.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.btnBuildSolutions.Enabled = False
         Me.btnBuildSolutions.Location = New System.Drawing.Point(0, 319)
         Me.btnBuildSolutions.Name = "btnBuildSolutions"
         Me.btnBuildSolutions.Size = New System.Drawing.Size(671, 42)
@@ -74,15 +76,19 @@ Partial Class SolutionBuilderForm
         '
         'txtboxBuildOutput
         '
-        Me.txtboxBuildOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtboxBuildOutput.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtboxBuildOutput.BackColor = System.Drawing.SystemColors.Control
         Me.txtboxBuildOutput.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtboxBuildOutput.Enabled = False
-        Me.txtboxBuildOutput.Location = New System.Drawing.Point(12, 166)
-        Me.txtboxBuildOutput.Multiline = True
+        Me.txtboxBuildOutput.DetectUrls = False
+        Me.txtboxBuildOutput.Location = New System.Drawing.Point(15, 164)
         Me.txtboxBuildOutput.Name = "txtboxBuildOutput"
-        Me.txtboxBuildOutput.Size = New System.Drawing.Size(647, 147)
+        Me.txtboxBuildOutput.ReadOnly = True
+        Me.txtboxBuildOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.txtboxBuildOutput.Size = New System.Drawing.Size(644, 149)
         Me.txtboxBuildOutput.TabIndex = 4
+        Me.txtboxBuildOutput.Text = ""
         '
         'SolutionBuilderForm
         '
@@ -96,7 +102,6 @@ Partial Class SolutionBuilderForm
         Me.Text = "Solution Builder"
         Me.grpboxSolutions.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -104,5 +109,5 @@ Partial Class SolutionBuilderForm
     Friend WithEvents btnAddSolution As Button
     Friend WithEvents grpboxSolutions As GroupBox
     Friend WithEvents btnBuildSolutions As Button
-    Friend WithEvents txtboxBuildOutput As TextBox
+    Friend WithEvents txtboxBuildOutput As RichTextBox
 End Class
