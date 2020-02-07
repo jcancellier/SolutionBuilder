@@ -73,6 +73,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\LocateMSBuildDialog.Designer.vb">
+      <DependentUpon>LocateMSBuildDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LocateMSBuildDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Models\ApplicationData.vb" />
     <Compile Include="Models\SolutionCheckListData.vb" />
     <Compile Include="SolutionBuilderForm.vb">
       <SubType>Form</SubType>
@@ -98,6 +105,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dialogs\LocateMSBuildDialog.resx">
+      <DependentUpon>LocateMSBuildDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SolutionBuilderForm.resx">
       <DependentUpon>SolutionBuilderForm.vb</DependentUpon>
     </EmbeddedResource>

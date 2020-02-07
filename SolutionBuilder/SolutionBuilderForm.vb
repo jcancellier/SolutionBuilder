@@ -57,8 +57,19 @@
         End If
 
         SetControlsEnabledStatus(False)
-        'Call with dummy data since the helper also serves as an event handler for Process.Exited event
-        BuildSolutionsHelper(New Object, New EventArgs())
+
+
+
+        If (String.IsNullOrEmpty(ApplicationData.Instance.MSBuildFileLocation)) Then
+            Dim locateMSBuildDialog As New LocateMSBuildDialog()
+            If locateMSBuildDialog.ShowDialog() = DialogResult.Cancel Or String.IsNullOrEmpty(locateMSBuildDialog.MSBuildFilePathResult) Then
+                SetControlsEnabledStatus(True)
+                Exit Sub
+            End If
+        End If ' If no MSBuild file path exits then retrieve it through form
+
+            'Call with dummy data since the helper also serves as an event handler for Process.Exited event
+            BuildSolutionsHelper(New Object, New EventArgs())
     End Sub
 
     Private Sub BuildSolutionsHelper(sender As Object, e As EventArgs)
