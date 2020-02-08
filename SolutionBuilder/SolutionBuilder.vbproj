@@ -73,6 +73,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\SystemConstants.vb" />
     <Compile Include="Dialogs\LocateMSBuildDialog.Designer.vb">
       <DependentUpon>LocateMSBuildDialog.vb</DependentUpon>
     </Compile>
@@ -103,6 +104,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utilities\LocateMSBuildService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dialogs\LocateMSBuildDialog.resx">
