@@ -85,7 +85,7 @@ Partial Class SolutionBuilderForm
         Me.txtboxBuildOutput.Location = New System.Drawing.Point(15, 164)
         Me.txtboxBuildOutput.Name = "txtboxBuildOutput"
         Me.txtboxBuildOutput.ReadOnly = True
-        Me.txtboxBuildOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical
+        Me.txtboxBuildOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
         Me.txtboxBuildOutput.Size = New System.Drawing.Size(644, 126)
         Me.txtboxBuildOutput.TabIndex = 4
         Me.txtboxBuildOutput.Text = ""
