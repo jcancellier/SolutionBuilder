@@ -27,8 +27,8 @@ Partial Class LocateMSBuildDialog
         Me.btnOpenFile = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.lblMSBuildInfo = New System.Windows.Forms.Label()
         Me.lblResults = New System.Windows.Forms.Label()
+        Me.lblMSBuildInfo = New System.Windows.Forms.Label()
         Me.btnConfirm = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -87,6 +87,15 @@ Partial Class LocateMSBuildDialog
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(456, 129)
         Me.TableLayoutPanel1.TabIndex = 0
         '
+        'lblResults
+        '
+        Me.lblResults.AutoSize = True
+        Me.lblResults.Location = New System.Drawing.Point(10, 74)
+        Me.lblResults.Margin = New System.Windows.Forms.Padding(10, 10, 3, 0)
+        Me.lblResults.Name = "lblResults"
+        Me.lblResults.Size = New System.Drawing.Size(0, 13)
+        Me.lblResults.TabIndex = 1
+        '
         'lblMSBuildInfo
         '
         Me.lblMSBuildInfo.AutoSize = True
@@ -98,15 +107,6 @@ Partial Class LocateMSBuildDialog
         Me.lblMSBuildInfo.Text = "MSBuild is used to build Visual Studio Solutions. You may allow Solution Builder " &
     "to auto-detect MSBuild, or you may manually locate the file. Select from the opt" &
     "ions below."
-        '
-        'lblResults
-        '
-        Me.lblResults.AutoSize = True
-        Me.lblResults.Location = New System.Drawing.Point(10, 74)
-        Me.lblResults.Margin = New System.Windows.Forms.Padding(10, 10, 3, 0)
-        Me.lblResults.Name = "lblResults"
-        Me.lblResults.Size = New System.Drawing.Size(0, 13)
-        Me.lblResults.TabIndex = 1
         '
         'btnConfirm
         '

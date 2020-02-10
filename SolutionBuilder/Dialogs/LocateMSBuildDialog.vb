@@ -4,6 +4,7 @@ Imports SolutionBuilder.Utilities
 Public Class LocateMSBuildDialog
     Public Property MSBuildFilePathResult As String = String.Empty
 
+#Region "Event Handlers"
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
@@ -32,4 +33,18 @@ Public Class LocateMSBuildDialog
     Private Sub LocateMSBuildDialog_Load(sender As Object, e As EventArgs) Handles Me.Load
         btnAutoDetect.Select()
     End Sub
+
+    Private Sub BtnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "MSBuild (MSBuild.exe) | MSBuild.exe"
+
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            MSBuildFilePathResult = openFileDialog.FileName
+            lblResults.Text = "MSBuild file selected: " & vbCrLf & MSBuildFilePathResult & vbCrLf & "Click Confirm to continue"
+            lblResults.ForeColor = DefaultForeColor
+            btnConfirm.Enabled = True
+            btnConfirm.Select()
+        End If
+    End Sub
+#End Region
 End Class
