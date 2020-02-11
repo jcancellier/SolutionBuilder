@@ -108,7 +108,6 @@
         txtboxBuildOutput.BeginInvoke(New MethodInvoker(
             Sub()
                 txtboxBuildOutput.AppendText(vbCrLf & e.Data)
-                txtboxBuildOutput.ScrollToCaret()
             End Sub))
     End Sub
 
@@ -119,7 +118,6 @@
         txtboxBuildOutput.BeginInvoke(New MethodInvoker(
             Sub()
                 txtboxBuildOutput.AppendText(vbCrLf & e.Data)
-                txtboxBuildOutput.ScrollToCaret()
             End Sub))
     End Sub
 

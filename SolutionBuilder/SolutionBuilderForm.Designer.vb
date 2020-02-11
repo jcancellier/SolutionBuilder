@@ -82,6 +82,7 @@ Partial Class SolutionBuilderForm
         Me.txtboxBuildOutput.BackColor = System.Drawing.SystemColors.Control
         Me.txtboxBuildOutput.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtboxBuildOutput.DetectUrls = False
+        Me.txtboxBuildOutput.HideSelection = False
         Me.txtboxBuildOutput.Location = New System.Drawing.Point(15, 164)
         Me.txtboxBuildOutput.Name = "txtboxBuildOutput"
         Me.txtboxBuildOutput.ReadOnly = True
