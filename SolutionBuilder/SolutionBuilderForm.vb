@@ -1,4 +1,7 @@
-﻿Public Class SolutionBuilderForm
+﻿Imports SolutionBuilder.Utilities
+Imports SolutionBuilder.Models
+
+Public Class SolutionBuilderForm
 
 #Region "Event Handlers"
     Private Sub SolutionBuilderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -57,6 +60,29 @@
         End If
 
         SetControlsEnabledStatus(False)
+
+        ' Locate MSBuild if file path not present (this will always execute on first run of program)
+        If String.IsNullOrEmpty(ApplicationData.Instance.MSBuildFileLocation) Then
+            Cursor = Cursors.WaitCursor
+            txtboxBuildOutput.AppendText($"Locating {Constants.MSBuildExe}")
+            ApplicationData.Instance.MSBuildFileLocation = LocateMSBuildService.Execute()
+            Cursor = Cursors.Default
+        End If
+
+        ' If no MSBuild file path was found then retrieve it through form
+        If (String.IsNullOrEmpty(ApplicationData.Instance.MSBuildFileLocation)) Then
+            Dim locateMSBuildDialog As New LocateMSBuildDialog()
+            If locateMSBuildDialog.ShowDialog() = DialogResult.Cancel Or String.IsNullOrEmpty(locateMSBuildDialog.MSBuildFilePathResult) Then
+                SetControlsEnabledStatus(True)
+                Exit Sub
+            ElseIf Not String.IsNullOrEmpty(locateMSBuildDialog.MSBuildFilePathResult) Then
+                ApplicationData.Instance.MSBuildFileLocation = locateMSBuildDialog.MSBuildFilePathResult
+            Else
+                SetControlsEnabledStatus(True)
+                Exit Sub
+            End If
+        End If
+
         'Call with dummy data since the helper also serves as an event handler for Process.Exited event
         BuildSolutionsHelper(New Object, New EventArgs())
     End Sub
@@ -76,7 +102,7 @@
                 txtboxBuildOutput.Clear()
             End Sub))
 
-        Dim msbuildPath As String = """c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\amd64\MSbuild.exe"""
+        Dim msbuildPath As String = $"""{ApplicationData.Instance.MSBuildFileLocation}"""
         Dim solution As String = chklistSolutions.CheckedItems(CType(chklistSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex)
         Dim buildCommand As String = $"/c ""{msbuildPath} {solution}"""
 
@@ -129,6 +155,10 @@
                 btnBuildSolutions.Enabled = enabled
                 chklistSolutions.Enabled = enabled
             End Sub))
+    End Sub
+
+    Private Sub SolutionBuilderForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        ApplicationData.Instance.Save()
     End Sub
 #End Region
 End Class
