@@ -158,5 +158,9 @@ Public Class SolutionBuilderForm
                 chklistSolutions.Enabled = enabled
             End Sub))
     End Sub
+
+    Private Sub SolutionBuilderForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        ApplicationData.Instance.Save()
+    End Sub
 #End Region
 End Class
