@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class SolutionBuilderForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,25 +20,16 @@ Partial Class SolutionBuilderForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.chklistSolutions = New System.Windows.Forms.CheckedListBox()
         Me.btnAddSolution = New System.Windows.Forms.Button()
         Me.grpboxSolutions = New System.Windows.Forms.GroupBox()
         Me.btnBuildSolutions = New System.Windows.Forms.Button()
         Me.txtboxBuildOutput = New System.Windows.Forms.RichTextBox()
         Me.chkboxShowBuildOutput = New System.Windows.Forms.CheckBox()
+        Me.chkListSolutions = New System.Windows.Forms.ListView()
         Me.grpboxSolutions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'chklistSolutions
-        '
-        Me.chklistSolutions.Dock = System.Windows.Forms.DockStyle.Top
-        Me.chklistSolutions.FormattingEnabled = True
-        Me.chklistSolutions.Location = New System.Drawing.Point(3, 16)
-        Me.chklistSolutions.Name = "chklistSolutions"
-        Me.chklistSolutions.Size = New System.Drawing.Size(641, 94)
-        Me.chklistSolutions.TabIndex = 0
         '
         'btnAddSolution
         '
@@ -54,7 +45,7 @@ Partial Class SolutionBuilderForm
         '
         Me.grpboxSolutions.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpboxSolutions.Controls.Add(Me.chklistSolutions)
+        Me.grpboxSolutions.Controls.Add(Me.chkListSolutions)
         Me.grpboxSolutions.Controls.Add(Me.btnAddSolution)
         Me.grpboxSolutions.Location = New System.Drawing.Point(12, 12)
         Me.grpboxSolutions.Name = "grpboxSolutions"
@@ -105,6 +96,20 @@ Partial Class SolutionBuilderForm
         Me.chkboxShowBuildOutput.Text = "Show Build Output"
         Me.chkboxShowBuildOutput.UseVisualStyleBackColor = True
         '
+        'chkListSolutions
+        '
+        Me.chkListSolutions.Alignment = System.Windows.Forms.ListViewAlignment.Left
+        Me.chkListSolutions.CheckBoxes = True
+        Me.chkListSolutions.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkListSolutions.HideSelection = False
+        Me.chkListSolutions.LabelWrap = False
+        Me.chkListSolutions.Location = New System.Drawing.Point(3, 16)
+        Me.chkListSolutions.Name = "chkListSolutions"
+        Me.chkListSolutions.Size = New System.Drawing.Size(641, 100)
+        Me.chkListSolutions.TabIndex = 2
+        Me.chkListSolutions.UseCompatibleStateImageBehavior = False
+        Me.chkListSolutions.View = System.Windows.Forms.View.List
+        '
         'SolutionBuilderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -121,11 +126,10 @@ Partial Class SolutionBuilderForm
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents chklistSolutions As CheckedListBox
     Friend WithEvents btnAddSolution As Button
     Friend WithEvents grpboxSolutions As GroupBox
     Friend WithEvents btnBuildSolutions As Button
     Friend WithEvents txtboxBuildOutput As RichTextBox
     Friend WithEvents chkboxShowBuildOutput As CheckBox
+    Friend WithEvents chkListSolutions As ListView
 End Class

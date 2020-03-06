@@ -13,7 +13,7 @@ Public Class SolutionBuilderForm
         )
 
         'Set current solution build index to -1
-        chklistSolutions.Tag = New SolutionCheckListData() With {
+        chkListSolutions.Tag = New SolutionCheckListData() With {
             .CurrentSolutionBuildingIndex = -1
         }
     End Sub
@@ -23,25 +23,17 @@ Public Class SolutionBuilderForm
         Using openFileDialog As New OpenFileDialog()
             openFileDialog.Filter = "Solution Files | *.sln"
             If openFileDialog.ShowDialog() = DialogResult.OK Then
-                chklistSolutions.Items.Add(openFileDialog.FileName, True)
-                btnBuildSolutions.Enabled = True
+                chkListSolutions.Items.Add(openFileDialog.FileName)
+                chkListSolutions.Items(chkListSolutions.Items.Count - 1).Checked = True
+                If chkListSolutions.CheckedItems.Count > 0 Then
+                    btnBuildSolutions.Enabled = True
+                End If
             End If
         End Using
     End Sub
 
     Private Sub btnBuildSolutions_Click(sender As Object, e As EventArgs) Handles btnBuildSolutions.Click
         BuildSolutions()
-    End Sub
-
-    Private Sub chklistSolutions_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles chklistSolutions.ItemCheck
-        BeginInvoke(New MethodInvoker(
-            Sub()
-                If chklistSolutions.CheckedItems.Count > 0 Then
-                    btnBuildSolutions.Enabled = True
-                Else
-                    btnBuildSolutions.Enabled = False
-                End If
-            End Sub))
     End Sub
 
     Private Sub chkboxShowBuildOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkboxShowBuildOutput.CheckedChanged
@@ -88,22 +80,36 @@ Public Class SolutionBuilderForm
     End Sub
 
     Private Sub BuildSolutionsHelper(sender As Object, e As EventArgs)
-        CType(chklistSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex += 1
-        If CType(chklistSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex = chklistSolutions.CheckedItems.Count Then
-            'Terminate build process for all solutions
-            SetControlsEnabledStatus(True)
-            CType(chklistSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex = -1
+        Dim done As Boolean = False
+        Invoke(New MethodInvoker(
+            Sub()
+                CType(chkListSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex += 1
+                If CType(chkListSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex = chkListSolutions.CheckedItems.Count Then
+                    'Terminate build process for all solutions
+                    SetControlsEnabledStatus(True)
+                    CType(chkListSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex = -1
+                    done = True
+                End If
+            End Sub))
+
+        If done Then
             Exit Sub
         End If
 
         'Clear build output
-        txtboxBuildOutput.BeginInvoke(New MethodInvoker(
+        txtboxBuildOutput.Invoke(New MethodInvoker(
             Sub()
                 txtboxBuildOutput.Clear()
             End Sub))
 
         Dim msbuildPath As String = $"""{ApplicationData.Instance.MSBuildFileLocation}"""
-        Dim solution As String = chklistSolutions.CheckedItems(CType(chklistSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex)
+        Dim solution As String = String.Empty
+
+        Invoke(New MethodInvoker(
+            Sub()
+                solution = chkListSolutions.CheckedItems(CType(chkListSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex).Text
+            End Sub))
+
         Dim buildCommand As String = $"/c ""{msbuildPath} {solution}"""
 
         Dim processStartInfo As New ProcessStartInfo() With {
@@ -149,16 +155,27 @@ Public Class SolutionBuilderForm
 
 
     Private Sub SetControlsEnabledStatus(enabled As Boolean)
-        BeginInvoke(New MethodInvoker(
+        Invoke(New MethodInvoker(
             Sub()
                 btnAddSolution.Enabled = enabled
                 btnBuildSolutions.Enabled = enabled
-                chklistSolutions.Enabled = enabled
+                chkListSolutions.Enabled = enabled
             End Sub))
     End Sub
 
     Private Sub SolutionBuilderForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         ApplicationData.Instance.Save()
+    End Sub
+
+    Private Sub chkListSolutions_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles chkListSolutions.ItemChecked
+        Invoke(New MethodInvoker(
+            Sub()
+                If chkListSolutions.CheckedItems.Count > 0 Then
+                    btnBuildSolutions.Enabled = True
+                Else
+                    btnBuildSolutions.Enabled = False
+                End If
+            End Sub))
     End Sub
 #End Region
 End Class
