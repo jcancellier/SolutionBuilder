@@ -6,6 +6,6 @@ Windows Forms Application (VB.NET) which allows users to select Visual Studio so
 - [ ] Reorder solutions to build in a different order
 - [ ] Remove solutions from solution list
 - [ ] Generate batch file
-- [ ] Git Functionality
+- [x] Git Functionality
   - [ ] Git pull
   - [ ] Git checkout
