@@ -28,6 +28,8 @@ Partial Class SolutionBuilderForm
         Me.txtboxBuildOutput = New System.Windows.Forms.RichTextBox()
         Me.chkboxShowBuildOutput = New System.Windows.Forms.CheckBox()
         Me.chkListSolutions = New System.Windows.Forms.ListView()
+        Me.clmHeaderSolution = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.clmHeaderBranch = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.grpboxSolutions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -100,6 +102,7 @@ Partial Class SolutionBuilderForm
         '
         Me.chkListSolutions.Alignment = System.Windows.Forms.ListViewAlignment.Left
         Me.chkListSolutions.CheckBoxes = True
+        Me.chkListSolutions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmHeaderSolution, Me.clmHeaderBranch})
         Me.chkListSolutions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chkListSolutions.HideSelection = False
         Me.chkListSolutions.LabelWrap = False
@@ -108,7 +111,17 @@ Partial Class SolutionBuilderForm
         Me.chkListSolutions.Size = New System.Drawing.Size(641, 100)
         Me.chkListSolutions.TabIndex = 2
         Me.chkListSolutions.UseCompatibleStateImageBehavior = False
-        Me.chkListSolutions.View = System.Windows.Forms.View.List
+        Me.chkListSolutions.View = System.Windows.Forms.View.Details
+        '
+        'clmHeaderSolution
+        '
+        Me.clmHeaderSolution.Text = "Solution"
+        Me.clmHeaderSolution.Width = 0
+        '
+        'clmHeaderBranch
+        '
+        Me.clmHeaderBranch.Text = "Branch"
+        Me.clmHeaderBranch.Width = 0
         '
         'SolutionBuilderForm
         '
@@ -132,4 +145,6 @@ Partial Class SolutionBuilderForm
     Friend WithEvents txtboxBuildOutput As RichTextBox
     Friend WithEvents chkboxShowBuildOutput As CheckBox
     Friend WithEvents chkListSolutions As ListView
+    Friend WithEvents clmHeaderSolution As ColumnHeader
+    Friend WithEvents clmHeaderBranch As ColumnHeader
 End Class
