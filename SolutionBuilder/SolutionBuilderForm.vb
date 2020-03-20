@@ -23,11 +23,18 @@ Public Class SolutionBuilderForm
         Using openFileDialog As New OpenFileDialog()
             openFileDialog.Filter = "Solution Files | *.sln"
             If openFileDialog.ShowDialog() = DialogResult.OK Then
-                chkListSolutions.Items.Add(openFileDialog.FileName)
+                Dim solutionFilePath As String = openFileDialog.FileName
+                Dim solutionSafeFilePath As String = openFileDialog.SafeFileName
+                Dim solutionDirectoryPath As String = System.IO.Path.GetDirectoryName(solutionFilePath)
+                Dim currentBranch As String = GitServices.RetrieveCurrentGitBranchService.Execute(solutionDirectoryPath)
+                Dim solutionDataItem As New ListViewItem(New String() {solutionSafeFilePath, currentBranch})
+                chkListSolutions.Items.Add(solutionDataItem)
+                chkListSolutions.Items(chkListSolutions.Items.Count - 1).Tag = solutionFilePath
                 chkListSolutions.Items(chkListSolutions.Items.Count - 1).Checked = True
                 If chkListSolutions.CheckedItems.Count > 0 Then
                     btnBuildSolutions.Enabled = True
                 End If
+                ResizeSolutionListColumns()
             End If
         End Using
     End Sub
@@ -107,7 +114,7 @@ Public Class SolutionBuilderForm
 
         Invoke(New MethodInvoker(
             Sub()
-                solution = chkListSolutions.CheckedItems(CType(chkListSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex).Text
+                solution = chkListSolutions.CheckedItems(CType(chkListSolutions.Tag, SolutionCheckListData).CurrentSolutionBuildingIndex).Tag
             End Sub))
 
         Dim buildCommand As String = $"/c ""{msbuildPath} {solution}"""
@@ -161,6 +168,11 @@ Public Class SolutionBuilderForm
                 btnBuildSolutions.Enabled = enabled
                 chkListSolutions.Enabled = enabled
             End Sub))
+    End Sub
+
+    Private Sub ResizeSolutionListColumns()
+        chkListSolutions.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+        chkListSolutions.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
     End Sub
 
     Private Sub SolutionBuilderForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
