@@ -24,10 +24,10 @@ Partial Class SolutionBuilderForm
     Private Sub InitializeComponent()
         Me.btnAddSolution = New System.Windows.Forms.Button()
         Me.grpboxSolutions = New System.Windows.Forms.GroupBox()
+        Me.chkListSolutions = New System.Windows.Forms.ListView()
         Me.btnBuildSolutions = New System.Windows.Forms.Button()
         Me.txtboxBuildOutput = New System.Windows.Forms.RichTextBox()
         Me.chkboxShowBuildOutput = New System.Windows.Forms.CheckBox()
-        Me.chkListSolutions = New System.Windows.Forms.ListView()
         Me.clmHeaderSolution = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmHeaderBranch = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.grpboxSolutions.SuspendLayout()
@@ -55,6 +55,21 @@ Partial Class SolutionBuilderForm
         Me.grpboxSolutions.TabIndex = 2
         Me.grpboxSolutions.TabStop = False
         Me.grpboxSolutions.Text = "Solutions"
+        '
+        'chkListSolutions
+        '
+        Me.chkListSolutions.Alignment = System.Windows.Forms.ListViewAlignment.Left
+        Me.chkListSolutions.CheckBoxes = True
+        Me.chkListSolutions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmHeaderSolution, Me.clmHeaderBranch})
+        Me.chkListSolutions.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chkListSolutions.HideSelection = False
+        Me.chkListSolutions.LabelWrap = False
+        Me.chkListSolutions.Location = New System.Drawing.Point(3, 16)
+        Me.chkListSolutions.Name = "chkListSolutions"
+        Me.chkListSolutions.Size = New System.Drawing.Size(641, 100)
+        Me.chkListSolutions.TabIndex = 2
+        Me.chkListSolutions.UseCompatibleStateImageBehavior = False
+        Me.chkListSolutions.View = System.Windows.Forms.View.Details
         '
         'btnBuildSolutions
         '
@@ -97,21 +112,6 @@ Partial Class SolutionBuilderForm
         Me.chkboxShowBuildOutput.TabIndex = 5
         Me.chkboxShowBuildOutput.Text = "Show Build Output"
         Me.chkboxShowBuildOutput.UseVisualStyleBackColor = True
-        '
-        'chkListSolutions
-        '
-        Me.chkListSolutions.Alignment = System.Windows.Forms.ListViewAlignment.Left
-        Me.chkListSolutions.CheckBoxes = True
-        Me.chkListSolutions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmHeaderSolution, Me.clmHeaderBranch})
-        Me.chkListSolutions.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.chkListSolutions.HideSelection = False
-        Me.chkListSolutions.LabelWrap = False
-        Me.chkListSolutions.Location = New System.Drawing.Point(3, 16)
-        Me.chkListSolutions.Name = "chkListSolutions"
-        Me.chkListSolutions.Size = New System.Drawing.Size(641, 100)
-        Me.chkListSolutions.TabIndex = 2
-        Me.chkListSolutions.UseCompatibleStateImageBehavior = False
-        Me.chkListSolutions.View = System.Windows.Forms.View.Details
         '
         'clmHeaderSolution
         '
