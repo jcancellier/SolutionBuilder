@@ -47,10 +47,6 @@ Public Class SolutionBuilderForm
         End Using
     End Sub
 
-    Private Sub CheckSolutionListSelectedIndex()
-        chkListSolutions_SelectedIndexChanged(Nothing, Nothing)
-    End Sub
-
     Private Sub btnBuildSolutions_Click(sender As Object, e As EventArgs) Handles btnBuildSolutions.Click
         BuildSolutions()
     End Sub
@@ -62,6 +58,80 @@ Public Class SolutionBuilderForm
             txtboxBuildOutput.Hide()
         End If
     End Sub
+
+    Private Sub SolutionBuilderForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        ApplicationData.Instance.Save()
+    End Sub
+
+    Private Sub chkListSolutions_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles chkListSolutions.ItemChecked
+        Invoke(New MethodInvoker(
+            Sub()
+                If chkListSolutions.CheckedItems.Count > 0 Then
+                    btnBuildSolutions.Enabled = True
+                Else
+                    btnBuildSolutions.Enabled = False
+                End If
+            End Sub))
+    End Sub
+
+    Private Sub btnMoveSolutionDown_Click(sender As Object, e As EventArgs) Handles btnMoveSolutionDown.Click
+        Dim indexUnderSelected As Integer = chkListSolutions.SelectedIndices(0) + 1
+        Dim itemUnderSelected As ListViewItem = chkListSolutions.Items(indexUnderSelected)
+        chkListSolutions.Items.RemoveAt(indexUnderSelected)
+        chkListSolutions.Items.Insert(indexUnderSelected - 1, itemUnderSelected)
+        CheckSolutionListSelectedIndex()
+    End Sub
+
+    Private Sub btnMoveSolutionUp_Click(sender As Object, e As EventArgs) Handles btnMoveSolutionUp.Click
+        Dim indexAboveSelected As Integer = chkListSolutions.SelectedIndices(0) - 1
+        Dim itemAboveSelected As ListViewItem = chkListSolutions.Items(indexAboveSelected)
+        chkListSolutions.Items.RemoveAt(indexAboveSelected)
+        chkListSolutions.Items.Insert(indexAboveSelected + 1, itemAboveSelected)
+        CheckSolutionListSelectedIndex()
+    End Sub
+
+    Private Sub btnRemoveSolution_Click(sender As Object, e As EventArgs) Handles btnRemoveSolution.Click
+        Dim currentIndex As Integer = chkListSolutions.SelectedIndices(0)
+        chkListSolutions.Items.RemoveAt(currentIndex)
+
+        ' If list is now empty disable building solutions
+        If chkListSolutions.Items.Count < 1 Then
+            btnBuildSolutions.Enabled = False
+        End If
+    End Sub
+
+    Private Sub chkListSolutions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkListSolutions.SelectedIndexChanged
+        Dim selectedItemsCount As Integer = chkListSolutions.SelectedItems.Count
+
+        'Enable remove button if a solution is selected
+        If selectedItemsCount > 0 Then
+            btnRemoveSolution.Enabled = True
+        Else
+            btnRemoveSolution.Enabled = False
+        End If
+
+        'Enable/Disable MoveUp and MoveDown Buttons
+        If selectedItemsCount > 0 AndAlso chkListSolutions.Items.Count > 1 Then
+            ' Enable Toolstrip buttons if no solutions are present
+            Dim isBottomItem As Boolean = (chkListSolutions.SelectedIndices(0) = chkListSolutions.Items.Count - 1)
+            If Not isBottomItem Then
+                btnMoveSolutionDown.Enabled = True
+            Else
+                btnMoveSolutionDown.Enabled = False
+            End If
+
+            Dim isTopItem As Boolean = (chkListSolutions.SelectedIndices(0) = 0)
+            If Not isTopItem Then
+                btnMoveSolutionUp.Enabled = True
+            Else
+                btnMoveSolutionUp.Enabled = False
+            End If
+        Else
+            btnMoveSolutionDown.Enabled = False
+            btnMoveSolutionUp.Enabled = False
+        End If
+    End Sub
+
 #End Region
 
 #Region "Private Methods"
@@ -96,6 +166,10 @@ Public Class SolutionBuilderForm
 
         'Call with dummy data since the helper also serves as an event handler for Process.Exited event
         BuildSolutionsHelper(New Object, New EventArgs())
+    End Sub
+
+    Private Sub CheckSolutionListSelectedIndex()
+        chkListSolutions_SelectedIndexChanged(Nothing, Nothing)
     End Sub
 
     Private Sub BuildSolutionsHelper(sender As Object, e As EventArgs)
@@ -172,7 +246,6 @@ Public Class SolutionBuilderForm
             End Sub))
     End Sub
 
-
     Private Sub SetControlsEnabledStatus(enabled As Boolean)
         Invoke(New MethodInvoker(
             Sub()
@@ -186,74 +259,6 @@ Public Class SolutionBuilderForm
         chkListSolutions.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
         chkListSolutions.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
     End Sub
-
-    Private Sub SolutionBuilderForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        ApplicationData.Instance.Save()
-    End Sub
-
-    Private Sub chkListSolutions_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles chkListSolutions.ItemChecked
-        Invoke(New MethodInvoker(
-            Sub()
-                If chkListSolutions.CheckedItems.Count > 0 Then
-                    btnBuildSolutions.Enabled = True
-                Else
-                    btnBuildSolutions.Enabled = False
-                End If
-            End Sub))
-    End Sub
-
-    Private Sub btnMoveSolutionDown_Click(sender As Object, e As EventArgs) Handles btnMoveSolutionDown.Click
-        Dim indexUnderSelected As Integer = chkListSolutions.SelectedIndices(0) + 1
-        Dim itemUnderSelected As ListViewItem = chkListSolutions.Items(indexUnderSelected)
-        chkListSolutions.Items.RemoveAt(indexUnderSelected)
-        chkListSolutions.Items.Insert(indexUnderSelected - 1, itemUnderSelected)
-        CheckSolutionListSelectedIndex()
-    End Sub
-
-    Private Sub btnMoveSolutionUp_Click(sender As Object, e As EventArgs) Handles btnMoveSolutionUp.Click
-        Dim indexAboveSelected As Integer = chkListSolutions.SelectedIndices(0) - 1
-        Dim itemAboveSelected As ListViewItem = chkListSolutions.Items(indexAboveSelected)
-        chkListSolutions.Items.RemoveAt(indexAboveSelected)
-        chkListSolutions.Items.Insert(indexAboveSelected + 1, itemAboveSelected)
-        CheckSolutionListSelectedIndex()
-    End Sub
-    Private Sub btnRemoveSolution_Click(sender As Object, e As EventArgs) Handles btnRemoveSolution.Click
-        Dim currentIndex As Integer = chkListSolutions.SelectedIndices(0)
-        chkListSolutions.Items.RemoveAt(currentIndex)
-    End Sub
-
-    Private Sub chkListSolutions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkListSolutions.SelectedIndexChanged
-        Dim selectedItemsCount As Integer = chkListSolutions.SelectedItems.Count
-
-        'Enable remove button if a solution is selected
-        If selectedItemsCount > 0 Then
-            btnRemoveSolution.Enabled = True
-        Else
-            btnRemoveSolution.Enabled = False
-        End If
-
-        'Enable/Disable MoveUp and MoveDown Buttons
-        If selectedItemsCount > 0 AndAlso chkListSolutions.Items.Count > 1 Then
-            ' Enable Toolstrip buttons if no solutions are present
-            Dim isBottomItem As Boolean = (chkListSolutions.SelectedIndices(0) = chkListSolutions.Items.Count - 1)
-            If Not isBottomItem Then
-                btnMoveSolutionDown.Enabled = True
-            Else
-                btnMoveSolutionDown.Enabled = False
-            End If
-
-            Dim isTopItem As Boolean = (chkListSolutions.SelectedIndices(0) = 0)
-            If Not isTopItem Then
-                btnMoveSolutionUp.Enabled = True
-            Else
-                btnMoveSolutionUp.Enabled = False
-            End If
-        Else
-            btnMoveSolutionDown.Enabled = False
-            btnMoveSolutionUp.Enabled = False
-        End If
-    End Sub
-
 
 #End Region
 End Class
