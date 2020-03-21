@@ -117,4 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnMoveSolutionUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACfSURBVDhP3Y67DcQgEEQpxSVcDeSURU4JVxQ5LVzAJ8QM
+        Yi3MsQinHmmlZbzvyYKL9/4TY/xhsLd6LwRrrTPmkaSHpZR1tiUzeFuygmlYyQxe7TcJB5fuemNnJWUx
+        zrmslLp9HAXoSIJbMGDrX4QQvtbabIy5zKOA/hQ3uAVTYQoKgvEeBehI8gdTUkpHW6cCpL9ZhhNs5yWC
+        flo9RIgT3biDNu78DVoAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnMoveSolutionDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVDhP5Y+xDcMgFEQps0BGyCLswARZIpPQ07JO2jAB
+        HUJAR3yIj8ABx6lz0pf4/+6ebLZSCCH3U8/nhRLnvMw/AXLOl/pcAvrMoC302ObpnLvW/QMADxlksTfh
+        YIzJWmuECwSlHpBSusFDBll0SjnGeLfWZiFECSulCmQP8N6/4GFHFh1022eR2UHajvDEb7+7hNBbSjnc
+        hzJpBtnPskw6gnwtk2aQ02VSD/m5TCLIcZmxN0oNhM2Di0JhAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnRemoveSolution.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABdSURBVDhPY6A6+Pbt239SMEENTk5OODFIHmzAQjVerBgk
+        9+H9RxRMGwPwYYIGwACIgyxJDMZqALqNMIyuGYQHqQGkYAwDYBgkic0VIIzTABgYPAYQg3EaQDz+9h8A
+        Eq5iJ6xaA5AAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>
