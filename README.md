@@ -3,8 +3,8 @@ Windows Forms Application (VB.NET) which allows users to select Visual Studio so
 
 ### Features
 - [x] Build many solutions one after another
-- [ ] Reorder solutions to build in a different order
-- [ ] Remove solutions from solution list
+- [x] Reorder solutions to build in a different order
+- [x] Remove solutions from solution list
 - [ ] Generate batch file
 - [x] Git Functionality
   - [ ] Git pull
